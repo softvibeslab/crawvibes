@@ -1,0 +1,194 @@
+{
+  "$schema": "../schema.json",
+  "name": "OpenClaw",
+  "id": "openclaw",
+  "description": "AI-powered automation agent with support for multiple models (Claude, GPT, Gemini, GLM, Grok) and integrations (Telegram, Discord, WhatsApp, Slack, etc.)",
+  "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/openclaw.svg",
+  "category": "ai",
+  "version": "1.0.0",
+  "website": "https://github.com/openclaw",
+  "tags": [
+    "ai",
+    "automation",
+    "agent",
+    "llm",
+    "telegram",
+    "discord",
+    "bot"
+  ],
+  "authors": [
+    {
+      "name": "SoftVibes Lab",
+      "website": "https://github.com/softvibeslab"
+    }
+  ],
+  "formFields": [
+    {
+      "type": "service",
+      "id": "openclaw",
+      "label": "OpenClaw Service",
+      "default": "openclaw",
+      "immutable": true
+    },
+    {
+      "type": "domain",
+      "id": "domain",
+      "label": "Domain",
+      "placeholder": "openclaw.your-domain.com"
+    },
+    {
+      "type": "number",
+      "id": "port",
+      "label": "Port",
+      "default": 49125,
+      "min": 1024,
+      "max": 65535
+    },
+    {
+      "type": "text",
+      "id": "gatewayToken",
+      "label": "Gateway Token",
+      "description": "Token for accessing OpenClaw gateway (generate a secure random token)",
+      "default": "",
+      "required": true,
+      "secret": true
+    },
+    {
+      "type": "select",
+      "id": "model",
+      "label": "AI Model",
+      "description": "Select your primary AI model",
+      "default": "sonnet",
+      "options": [
+        {
+          "label": "Claude Sonnet 4.5",
+          "value": "sonnet"
+        },
+        {
+          "label": "GPT 5.2",
+          "value": "gpt"
+        },
+        {
+          "label": "GLM 4.7 (Zhipu AI)",
+          "value": "glm"
+        },
+        {
+          "label": "Gemini 3 Flash",
+          "value": "gemini"
+        },
+        {
+          "label": "Grok 4.1",
+          "value": "xai"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "anthropicApiKey",
+      "label": "Anthropic API Key",
+      "description": "Required for Claude models. Get it from console.anthropic.com",
+      "default": "",
+      "secret": true,
+      "showIf": {
+        "field": "model",
+        "equals": "sonnet"
+      }
+    },
+    {
+      "type": "text",
+      "id": "openaiApiKey",
+      "label": "OpenAI API Key",
+      "description": "Required for GPT models. Get it from platform.openai.com",
+      "default": "",
+      "secret": true,
+      "showIf": {
+        "field": "model",
+        "equals": "gpt"
+      }
+    },
+    {
+      "type": "text",
+      "id": "zhipuApiKey",
+      "label": "Zhipu AI API Key",
+      "description": "Required for GLM models. Get it from open.bigmodel.cn",
+      "default": "",
+      "secret": true,
+      "showIf": {
+        "field": "model",
+        "equals": "glm"
+      }
+    },
+    {
+      "type": "text",
+      "id": "googleApiKey",
+      "label": "Google API Key",
+      "description": "Required for Gemini models. Get it from console.cloud.google.com",
+      "default": "",
+      "secret": true,
+      "showIf": {
+        "field": "model",
+        "equals": "gemini"
+      }
+    },
+    {
+      "type": "text",
+      "id": "xaiApiKey",
+      "label": "xAI API Key",
+      "description": "Required for Grok models. Get it from x.ai",
+      "default": "",
+      "secret": true,
+      "showIf": {
+        "field": "model",
+        "equals": "xai"
+      }
+    },
+    {
+      "type": "select",
+      "id": "timezone",
+      "label": "Timezone",
+      "default": "America/Phoenix",
+      "options": [
+        {
+          "label": "America/Phoenix",
+          "value": "America/Phoenix"
+        },
+        {
+          "label": "America/New_York",
+          "value": "America/New_York"
+        },
+        {
+          "label": "America/Chicago",
+          "value": "America/Chicago"
+        },
+        {
+          "label": "America/Los_Angeles",
+          "value": "America/Los_Angeles"
+        },
+        {
+          "label": "Europe/Madrid",
+          "value": "Europe/Madrid"
+        },
+        {
+          "label": "Europe/London",
+          "value": "Europe/London"
+        },
+        {
+          "label": "Asia/Shanghai",
+          "value": "Asia/Shanghai"
+        },
+        {
+          "label": "UTC",
+          "value": "UTC"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "telegramBotToken",
+      "label": "Telegram Bot Token",
+      "description": "Optional: Enable Telegram integration. Get it from @BotFather",
+      "default": "",
+      "secret": true
+    }
+  ]
+}

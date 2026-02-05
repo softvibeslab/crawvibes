@@ -1,0 +1,32 @@
+services:
+  openclaw:
+    image: ghcr.io/hostinger/hvps-openclaw:latest
+    init: true
+    container_name: openclaw-${EASYPANEL_E_ID}
+    ports:
+      - ${PORT}:49125
+    environment:
+      - PORT=${PORT}
+      - TZ=${TIMEZONE}
+      - OPENCLAW_GATEWAY_TOKEN=${GATEWAY_TOKEN}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ZHIPU_API_KEY=${ZHIPU_API_KEY}
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      - XAI_API_KEY=${XAI_API_KEY}
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+    restart: unless-stopped
+    volumes:
+      - openclaw-data-${EASYPANEL_SERVICE_ID}:/data
+      - openclaw-brew-${EASYPANEL_SERVICE_ID}:/home/linuxbrew
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.openclaw-${EASYPANEL_SERVICE_ID}.rule=Host(`${DOMAIN}`)
+      - traefik.http.routers.openclaw-${EASYPANEL_SERVICE_ID}.entrypoints=https
+      - traefik.http.routers.openclaw-${EASYPANEL_SERVICE_ID}.tls=true
+      - traefik.http.routers.openclaw-${EASYPANEL_SERVICE_ID}.tls.certresolver=letsencrypt
+      - traefik.http.services.openclaw-${EASYPANEL_SERVICE_ID}.loadbalancer.server.port=${PORT}
+
+volumes:
+  openclaw-data-${EASYPANEL_SERVICE_ID}:
+  openclaw-brew-${EASYPANEL_SERVICE_ID}:
