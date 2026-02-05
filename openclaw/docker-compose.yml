@@ -17,8 +17,8 @@ services:
       - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
     restart: unless-stopped
     volumes:
-      - openclaw-data-${EASYPANEL_SERVICE_ID}:/data
-      - openclaw-brew-${EASYPANEL_SERVICE_ID}:/home/linuxbrew
+      - openclaw-data:/data
+      - openclaw-brew:/home/linuxbrew
     labels:
       - traefik.enable=true
       - traefik.http.routers.openclaw-${EASYPANEL_SERVICE_ID}.rule=Host(`${DOMAIN}`)
@@ -28,5 +28,5 @@ services:
       - traefik.http.services.openclaw-${EASYPANEL_SERVICE_ID}.loadbalancer.server.port=${PORT}
 
 volumes:
-  openclaw-data-${EASYPANEL_SERVICE_ID}:
-  openclaw-brew-${EASYPANEL_SERVICE_ID}:
+  openclaw-data:
+  openclaw-brew:
